@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Personal Branding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a2a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        #stars-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+        
+        header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(10, 10, 42, 0.7);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #5ee7ff;
+            text-shadow: 0 0 10px rgba(94, 231, 255, 0.5);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(94, 231, 255, 0.2);
+            color: #5ee7ff;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            color: #b3b3ff;
+        }
+        
+        .cta-button {
+            padding: 0.8rem 2rem;
+            background-color: #5ee7ff;
+            color: #0a0a2a;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem;
+        }
+        
+        .cta-button:hover {
+            background-color: #ffffff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(94, 231, 255, 0.3);
+        }
+        
+        .rocket-animation {
+            width: 220px;
+            height: 220px;
+            margin: 2rem 0;
+            position: fixed;
+            z-index: 10;
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            /* Starting in center */
+            top: 10%;
+            left: 10%;
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+        
+        #planet1 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #ff5e5e, #ff8f5e);
+            bottom: -50px;
+            left: 15%;
+            box-shadow: 0 0 50px rgba(255, 94, 94, 0.7);
+            z-index: 1;
+        }
+        
+        #planet2 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #5e7fff, #5ee7ff);
+            top: -100px;
+            right: 10%;
+            box-shadow: 0 0 80px rgba(94, 127, 255, 0.7);
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        #ring {
+            position: absolute;
+            width: 400px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: rotate(30deg);
+            top: 125px;
+            left: -50px;
+        }
+        
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #5ee7ff;
+            text-align: center;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(94, 231, 255, 0.3);
+            height: 400px;
+            background: linear-gradient(135deg, #2d2d7a, #0a0a2a);
+            position: relative;
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/600/400') center/cover no-repeat;
+            opacity: 0.6;
+            mix-blend-mode: screen;
+        }
+        
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background: rgba(45, 45, 122, 0.5);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(94, 231, 255, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(94, 231, 255, 0.2);
+            border: 1px solid rgba(94, 231, 255, 0.3);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #5ee7ff;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(45, 45, 122, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(94, 231, 255, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #b3b3ff;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid rgba(94, 231, 255, 0.3);
+            background: rgba(10, 10, 42, 0.7);
+            color: #ffffff;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #5ee7ff;
+            box-shadow: 0 0 10px rgba(94, 231, 255, 0.5);
+        }
+        
+        button {
+            padding: 0.8rem 2rem;
+            background-color: #5ee7ff;
+            color: #0a0a2a;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(94, 231, 255, 0.3);
+        }
+        
+        footer {
+            background-color: rgba(10, 10, 42, 0.8);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: #ffffff;
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #5ee7ff;
+            transform: translateY(-3px);
+        }
+        
+        .attribution {
+            font-size: 0.8rem;
+            color: #b3b3ff;
+            margin-top: 1rem;
+        }
+        
+        /* 3D Animation Effects */
+        .scene {
+            perspective: 1000px;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .orbit {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border: 2px dotted rgba(94, 231, 255, 0.2);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(70deg);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotateX(70deg) rotateZ(0deg); }
+            100% { transform: translate(-50%, -50%) rotateX(70deg) rotateZ(360deg); }
+        }
+        
+        .satellite {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        
+        #satellite1 {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        #satellite2 {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column-reverse;
+            }
+            
+            #planet1, #planet2 {
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="stars-container"></div>
+    
+    <header>
+        <div class="logo">COSMIC BRAND</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="scene">
+        <div class="orbit">
+            <div class="satellite" id="satellite1"></div>
+            <div class="satellite" id="satellite2"></div>
+        </div>
+    </div>
+    
+    <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Travel%20and%20Places/Rocket.webp" alt="Animated Rocket" class="rocket-animation" id="rocket">
+    
+    <section class="hero" id="home">
+        <div class="planet" id="planet1"></div>
+        <div class="planet" id="planet2">
+            <div id="ring"></div>
+        </div>
+        
+        <h1>EXPLORE THE UNIVERSE OF POSSIBILITIES</h1>
+        <p>Hay Saya YoshCasaster Bercita cita ingin menjadi Programmer </p>
+        
+        <div>
+            <a href="#contact" class="cta-button">START YOUR JOURNEY</a>
+            <a href="#services" class="cta-button">DISCOVER SERVICES</a>
+        </div>
+    </section>
+    
+    <section id="about">
+        <h2>MISSION CONTROL</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Welcome to my cosmic corner of the digital universe. As a passionate explorer of creativity and innovation, I've embarked on a mission to help brands reach new heights and discover uncharted territories in their industries.</p>
+                <br>
+                <p>With a background in stellar design and strategic planning, I create solutions that are light-years ahead of the competition. My approach combines cutting-edge technology with timeless principles to ensure your brand not only stands out but truly shines in the vast digital cosmos.</p>
+                <br>
+                <p>Whether you're looking to launch a new project, rebrand your existing presence, or simply add some cosmic flair to your business, I'm here to guide you through the journey from liftoff to landing.</p>
+            </div>
+            <div class="about-image"></div>
+        </div>
+    </section>
+    
+    <section id="services">
+        <h2>STELLAR SERVICES</h2>
+        <div class="services-container">
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>Brand Liftoff</h3>
+                <p>Complete branding solutions that propel your business into the spotlight with custom logos, color schemes, and brand guidelines that capture your cosmic essence.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💫</div>
+                <h3>Orbital Web Design</h3>
+                <p>Stunning, responsive websites that revolve around your business goals while providing stellar user experiences across all devices and platforms.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔭</div>
+                <h3>Cosmic Strategy</h3>
+                <p>Data-driven marketing strategies that navigate the digital universe to connect with your target audience and achieve astronomical results.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h2>SEND A TRANSMISSION</h2>
+        <div class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your email">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Your message"></textarea>
+            </div>
+            <button type="submit">LAUNCH MESSAGE</button>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="social-links">
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+            <a href="#">GitHub</a>
+        </div>
+        <p>&copy; 2025 Cosmic Brand. All rights reserved.</p>
+        <p class="attribution">Space-themed personal branding website</p>
+    </footer>
+    
+    <script>
+        // Create twinkling stars
+        const starsContainer = document.getElementById('stars-container');
+        const starsCount = 200;
+        
+        for (let i = 0; i < starsCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            // Random position
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            
+            // Random size
+            const size = Math.random() * 3;
+            
+            // Random animation delay
+            const delay = Math.random() * 5;
+            
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.animationDelay = `${delay}s`;
+            
+            starsContainer.appendChild(star);
+        }
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Rocket animation on scroll
+        const rocket = document.getElementById('rocket');
+        const heroSection = document.getElementById('home');
+        const aboutSection = document.getElementById('about');
+        const servicesSection = document.getElementById('services');
+        
+        // Initial animation
+        rocket.style.animation = 'float 6s ease-in-out infinite';
+        
+        // Get section positions for animation triggers
+        const getOffsetTop = element => {
+            let offsetTop = 0;
+            while(element) {
+                offsetTop += element.offsetTop;
+                element = element.offsetParent;
+            }
+            return offsetTop;
+        }
+        
+        const heroTop = getOffsetTop(heroSection);
+        const aboutTop = getOffsetTop(aboutSection);
+        const servicesTop = getOffsetTop(servicesSection);
+        
+        // Add scroll event listener for rocket animation
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.body.clientHeight;
+            
+            // Calculate scroll percentage (0 to 1)
+            const scrollPercentage = scrollPosition / (documentHeight - windowHeight);
+            
+            // Update rocket position based on scroll
+            if (scrollPosition < heroTop + windowHeight) {
+                // In hero section - center position with float animation
+                rocket.style.animation = 'float 6s ease-in-out infinite';
+                rocket.style.top = '50%';
+                rocket.style.left = '50%';
+                rocket.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+                rocket.style.width = '120px';
+                rocket.style.height = '120px';
+            } 
+            else if (scrollPosition < aboutTop + windowHeight) {
+                // Transition to about section - move to right and grow
+                rocket.style.animation = 'none';
+                rocket.style.top = '25%';
+                rocket.style.left = '75%';
+                rocket.style.transform = 'translate(-50%, -50%) rotate(45deg)';
+                rocket.style.width = '150px';
+                rocket.style.height = '150px';
+            }
+            else if (scrollPosition < servicesTop + windowHeight) {
+                // Transition to services section - move to left
+                rocket.style.animation = 'none';
+                rocket.style.top = '50%';
+                rocket.style.left = '25%';
+                rocket.style.transform = 'translate(-50%, -50%) rotate(-45deg)';
+                rocket.style.width = '180px';
+                rocket.style.height = '180px';
+            }
+            else {
+                // Beyond services section - move toward top
+                rocket.style.animation = 'none';
+                rocket.style.top = '15%';
+                rocket.style.left = '50%';
+                rocket.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+                rocket.style.width = '120px';
+                rocket.style.height = '120px';
+            }
+            
+            // Parallax for planets
+            document.getElementById('planet1').style.transform = `translateY(${scrollPosition * 0.1}px)`;
+            document.getElementById('planet2').style.transform = `translateY(${scrollPosition * -0.05}px)`;
+            
+            // Show/hide header background
+            const header = document.querySelector('header');
+            if (scrollPosition > 50) {
+                header.style.backgroundColor = 'rgba(10, 10, 42, 0.9)';
+            } else {
+                header.style.backgroundColor = 'rgba(10, 10, 42, 0.7)';
+            }
+        });
+    </script>
+</body>
+</html>
